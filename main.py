@@ -14305,45 +14305,45 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                                 await safe_send_message(response.Data.chat_type, error_log, uid, chat_id, key, iv)
 
 
-                        if inPuTMsG.strip().startswith('/رقص '):
+                         if inPuTMsG.strip().startswith('/رقص '):
                             parts = inPuTMsG.strip().split()
                             
+                            # ملاحظة: عدلت شرط الطول ليدعم أكثر من 3 أجزاء (مثال: /رقص [كود] [ايدي1] [ايدي2] [ايدي3] [رقم_الرقصة])
                             if len(parts) < 3:
-                                await safe_send_message(response.Data.chat_type, "❌ الاستخدام: /new [الكود] [رقم_الرقصة]", uid, chat_id, key, iv)
+                                await safe_send_message(response.Data.chat_type, "❌ الاستخدام: /رقص [الكود] [ايدي1] [ايدي2...] [رقم_الرقصة]", uid, chat_id, key, iv)
                             else:
                                 team_code = parts[1]
+                                # الرقم الأخير دائماً هو رقم الرقصة، وما بين الكود والرقم هم الـ UIDs
+                                emote_key = int(parts[-1])
+                                target_uids = parts[2:-1] # استخراج كل الأيدي الموجودة بين الكود والرقصة
                                 
-                                # تحديد الأيدي والرقصة
-                                if len(parts) == 3:
-                                    target_uid = uid
-                                    emote_key = int(parts[2])
-                                else:
-                                    target_uid = int(parts[2])
-                                    emote_key = int(parts[3])
-                                
-                                # البحث عن الرقصة في القائمة الكبيرة
                                 emote_id = ALL_SAMI.get(emote_key, emote_key)
                                 
                                 try:
                                     # 1. الدخول للتيم
                                     EM = await GenJoinSquadsPacket(team_code, key, iv)
                                     await SEndPacKeT(whisper_writer, online_writer, 'OnLine', EM)
-                                    await asyncio.sleep(1) # وقت أطول قليلاً لضمان الاستقرار
+                                    await asyncio.sleep(1.5) 
                                     
-                                    # 2. تنفيذ الرقصة
-                                    emote_packet = await Emote_k(target_uid, emote_id, key, iv, region)
-                                    await SEndPacKeT(whisper_writer, online_writer, 'OnLine', emote_packet)
+                                    # 2. اللوب لتنفيذ الرقصة لكل ايدي
+                                    for t_uid in target_uids:
+                                        target_uid = int(t_uid)
+                                        print(f"💃 Executing emote {emote_id} for UID: {target_uid}")
+                                        
+                                        emote_packet = await Emote_k(target_uid, emote_id, key, iv, region)
+                                        await SEndPacKeT(whisper_writer, online_writer, 'OnLine', emote_packet)
+                                        await asyncio.sleep(0.8) # تأخير بسيط بين كل رقصة وأخرى لضمان وصول الحزم
                                     
                                     # 3. الخروج من التيم
-                                    await asyncio.sleep(2)
+                                    await asyncio.sleep(1)
                                     leave = await ExiT(uid, key, iv)
                                     await SEndPacKeT(whisper_writer, online_writer, 'OnLine', leave)
                                     
-                                    # رسالة تأكيد اختيارية
-                                    #await safe_send_message(response.Data.chat_type, f"✅ تم تنفيذ الرقصة رقم {emote_key} بنجاح!", uid, chat_id, key, iv)
+                                    await safe_send_message(response.Data.chat_type, f"✅ تم تنفيذ الرقصة لـ {len(target_uids)} أشخاص!", uid, chat_id, key, iv)
                                     
                                 except Exception as e:
-                                    print(f"Error in /new: {e}")
+                                    print(f"Error in /رقص: {e}")
+
 
 
 # ==========================================
