@@ -14340,7 +14340,7 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                                     leave = await ExiT(uid, key, iv)
                                     await SEndPacKeT(whisper_writer, online_writer, 'OnLine', leave)
                                     
-                                    await safe_send_message(response.Data.chat_type, f"✅ تم تنفيذ الرقصة لـ {len(target_uids)} أشخاص!", uid, chat_id, key, iv)
+                                    #await safe_send_message(response.Data.chat_type, f"✅ تم تنفيذ الرقصة لـ {len(target_uids)} أشخاص!", uid, chat_id, key, iv)
                                     
                                 except Exception as e:
                                     print(f"Error in /رقص: {e}")
