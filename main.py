@@ -5623,7 +5623,36 @@ ALL_SAMI = {
     446: 909037011,
     447: 909038012,
     448: 909035012,
-    449: 909042008
+    440: 909000075,
+    441: 909033001,
+    442: 909000090,
+    443: 909000068,
+    444: 909000098,
+    445: 909035007,
+    446: 909037011,
+    447: 909038012,
+    448: 909035012,
+    449: 909054001,
+    450: 909054002,
+    451: 909054003,
+    452: 909054004,
+    453: 909054005,
+    454: 909054006,
+    455: 909054007,
+    456: 909054008,
+    457: 909054009,
+    458: 909054010,
+    459: 909054011,
+    460: 909054012,
+    461: 909054013,
+    462: 909054014,
+    463: 909054015,
+    464: 909054016,
+    465: 909054017,
+    466: 909054018,
+    467: 909054019,
+    468: 909054020
+
 }
 
 def titles():
@@ -11948,7 +11977,7 @@ async def TcPOnLine(ip, port, key, iv, AutHToKen, reconnect_delay=0.5):
                                     await SEndPacKeT(whisper_writer, online_writer, 'ChaT', JoinCHaT)
                     
                                     # Optional welcome back message
-                                    welcome_msg = """[B][C][FFFF00]🤖 Bot reconnected!"""
+                                    welcome_msg = """[B][C][FFFF00]🤖 بوت على هونك"""
                                     P = await SEndMsG(0, welcome_msg, OwNer_UiD, OwNer_UiD, key, iv, region)
                                     await SEndPacKeT(whisper_writer, online_writer, 'ChaT', P)
                     
