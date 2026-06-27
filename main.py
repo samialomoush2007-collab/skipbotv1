@@ -14372,8 +14372,8 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                             try:
                                 # شرط التحقق من قائمة الآيديهات المسموحة
                                 if str(uid) not in ALLOWED_UIDS:
-                                    not_admin_msg = "[b][c][FF0000]مسوي خوي ؟؟ بس لسامي اذلف"
-                                    await safe_send_message(response.Data.chat_type, not_admin_msg, uid, chat_id, key, iv)
+                                    #not_admin_msg = "[b][c][FF0000]مسوي خوي ؟؟ بس لسامي اذلف"
+                                    #await safe_send_message(response.Data.chat_type, not_admin_msg, uid, chat_id, key, iv)
                                     continue
 
                                 # استدعاء راندوم داخل الكود نفس طلبك
