@@ -14328,14 +14328,18 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                         if inPuTMsG.strip().startswith('/رقص '):
                             parts = inPuTMsG.strip().split()
                             
-                            # أقل عدد هو /رقص [code] [emote] (3 أجزاء)
+                            # نتحقق من وجود الكود والرقصة على الأقل (3 أجزاء)
                             if len(parts) < 3:
-                                await safe_send_message(response.Data.chat_type, "❌ الاستخدام: /رقص [الكود] [آيدي1] [آيدي2...] [رقم_الرقصة]", uid, chat_id, key, iv)
+                                await safe_send_message(response.Data.chat_type, "❌ الاستخدام: /رقص [الكود] [آيدي1...] [رقم_الرقصة]", uid, chat_id, key, iv)
                             else:
                                 try:
                                     team_code = parts[1]
-                                    emote_key = int(parts[-1])  # آخر جزء هو دائماً الرقصة
-                                    target_uids = parts[2:-1]   # كل ما بين الكود والرقصة هو آيديات
+                                    emote_key = int(parts[-1])  # آخر جزء هو الرقصة
+                                    target_uids = parts[2:-1]   # الآيديات الموجودة (إن وجدت)
+                                    
+                                    # إذا لم يضع المستخدم آيديات، نجعل القائمة تحتوي على آيدي صاحب الأمر فقط
+                                    if not target_uids:
+                                        target_uids = [uid]
                                     
                                     emote_id = ALL_SAMI.get(emote_key, emote_key)
                                     
@@ -14344,10 +14348,13 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                                     await SEndPacKeT(whisper_writer, online_writer, 'OnLine', EM)
                                     await asyncio.sleep(1.5)
                                     
-                                    # 2. تنفيذ الرقصة لكل الآيديات الموجودة
+                                    # 2. تنفيذ الرقصة لكل الآيديات
                                     for uid_str in target_uids:
                                         try:
-                                            target_uid = int(uid_str)
+                                            # إذا كان العنصر هو آيدي صاحب الأمر (الذي أضفناه يدوياً)، نستخدم uid مباشرة
+                                            # وإذا كان آيدي من المدخلات، نحوله إلى int
+                                            target_uid = int(uid_str) if isinstance(uid_str, str) else uid_str
+                                            
                                             emote_packet = await Emote_k(target_uid, emote_id, key, iv, region)
                                             await SEndPacKeT(whisper_writer, online_writer, 'OnLine', emote_packet)
                                             await asyncio.sleep(0.5)
@@ -14361,6 +14368,7 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                                     
                                 except Exception as e:
                                     print(f"Error in /رقص: {e}")
+
 
 
 
