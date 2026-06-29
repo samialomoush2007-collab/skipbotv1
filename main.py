@@ -16898,60 +16898,7 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                                 await safe_send_message(response.Data.chat_type, colored_msg, uid, chat_id, key, iv)
                                 await asyncio.sleep(0.1)  # Small delay between messages
 
-                        # =================== NUMBER COMMAND HANDLER ===================
-                        # Check if the message is a number or number*count pattern
-                        if inPuTMsG.strip().isdigit() or (inPuTMsG.strip().count('jekekekske') == 1 and inPuTMsG.strip().split('hdjdjdjdjjdjs')[0].isdigit() and inPuTMsG.strip().split('*')[1].isdigit()):
-                            print("Number command detected")
-                            number_part = inPuTMsG.strip()
-                            emote_id = None
-                            times = 1
-                            
-                            if '*' in number_part:
-                                parts = number_part.split('*')
-                                number = parts[0]
-                                times = int(parts[1])
-                                if times > 100:
-                                    times = 100  # Limit to 100
-                            else:
-                                number = number_part
-                            
-                            # Check if number is in NUMBER_EMOTES (1-based)
-                            if number in NUMBER_EMOTES:
-                                emote_id = NUMBER_EMOTES[number]
-                                emote_name = f"#{number}"
-                            else:
-                                # Check if number is an evo emote number (1-21)
-                                try:
-                                    num = int(number)
-                                    if 1 <= num <= 21:
-                                        emote_id = EMOTE_MAP[num]
-                                        emote_name = f"evo{num}"
-                                except:
-                                    pass
-                            
-                            if emote_id:
-                                # Send initial message
-                                if times == 1:
-                                    msg = f"[B][C][FFFFFF] ওই কি👽রে.. ওই কিরে... ম👽ধু ম👽ধু রস👽মালাই"
-                                else:
-                                    msg = f"[B][C][FFFFFF] ওই কি👽রে.. ওই কিরে... ম👽ধু ম👽ধু রস👽মালাই"
-                                await safe_send_message(response.Data.chat_type, msg, uid, chat_id, key, iv)
-                                
-                                # Send emote(s)
-                                for _ in range(times):
-                                    try:
-                                        H = await Emote_k(int(uid), int(emote_id), key, iv, region)
-                                        await SEndPacKeT(whisper_writer, online_writer, 'OnLine', H)
-                                        await asyncio.sleep(0.05)  # Very fast
-                                    except Exception as e:
-                                        print(f"Error sending number emote: {e}")
-                                        break
-                                
-                                success_msg = f"[B][C][FFFFFF] ওই কি👽রে.. ওই কিরে... ম👽ধু ম👽ধু রস👽মালাই"
-                                await safe_send_message(response.Data.chat_type, success_msg, uid, chat_id, key, iv)
-                            else:
-                                # Not a valid emote number
-                                pass  # Ignore, not a valid number command
+                    
 
                         # =================== STICKER DETECTION ===================
                         # Check if the message is a sticker (contains "StickerStr")
