@@ -14642,7 +14642,85 @@ async def TcPChaT(ip, port, AutHToKen, key, iv, LoGinDaTaUncRypTinG, ready_event
                             
                             continue
                             
-                            
+
+
+
+                        if inPuTMsG.strip().startswith('/1234567888 '):
+                            print('Processing 2-sec Gali & Double Emote Attack')
+
+                            try:
+                                parts = inPuTMsG.strip().split(maxsplit=1)
+                                if len(parts) < 2:
+                                    error_usage = "[B][C][FF0000]❌ الاستخدام: /gali <name>\n[FFFFFF]أمثلة: /gali hater"
+                                    await safe_send_message(response.Data.chat_type, error_usage, uid, chat_id, key, iv)
+                                else:
+                                    name_input = parts[1].strip()
+                                    
+                                    # --- ১. বস প্রোটেকশন (Boss Protection Logic) ---
+                                    if any(boss.lower() in name_input.lower() for boss in ["skip", "skip", "admin"]):
+                                        dhomok_msg = (
+                                            "[B][C][FF0000]🚨 تحذير من التنمر! 🚨\n\n"
+                                            "[B][C][FFFFFF]من تحاول إهانته بحق الجحيم؟?\n"
+                                            "[B][C][00FF00]SKIP-CODEX 🔥\n\n"
+                                            "[B][C][FFFF00]جيت مافي هروب ولا رجعه!"
+                                        )
+                                        await safe_send_message(response.Data.chat_type, dhomok_msg, uid, chat_id, key, iv)
+                                        
+                                        try:
+                                            H_boss = await Emote_k(15818424062, 909000002, key, iv, region)
+                                            await SEndPacKeT(whisper_writer, online_writer, 'OnLine', H_boss)
+                                        except: pass
+                                        continue # গালি দেওয়া বন্ধ করে লুপের শুরুতে ফিরে যাবে
+
+                                    # --- ২. সাধারণ টার্গেট এর জন্য লুপ সেটআপ ---
+                                    target_emote_id = 909000002
+                                    bot_uid = 15818424062
+                                    user_uid = response.Data.uid
+
+                                    messages = [
+                                        "{Name} كسـ امـك",
+                                        "{Name} يا ابن العاهرةـ، تباً لأمك!!",
+                                        "{Name} انيـك جدتك وعمتك وخال🙂تك وخوواتك وعماتك وخالاتك",
+                                        "{Name} ",
+                                        "{Name} امـك شغاله رقا🙂صه تهز للاوادم يا زاني",
+                                        "FU🙃CK🙃 {Name} !!",
+                                        "{Name} كسمـك بلعربي وبلانجليزي يا 🙂عاهـر ولد العاهـره",
+                                        "{Name} خاضـع مصـاص انيـك عيلتك على زبــي",
+                                        "{Name} يعطك ﻋﺼـﺒﺔ ﻣﻌﺼـﻮﺑﺔ ﻓﻲ 🙂ﺻـﺮﻡ ﺍﻣـٕﻚ ﻣﻘﻠـﻮﺑﺔ ﻭ ﻋﺼﺒـﺔ ﺟﻤـﻴﻠﺔ ﻓﻲ ﺻـﺮﻡ ﺍﻣـﻚ ﺍﻟﺒـﻬﻴﻤﺔ",
+                                        "{Name} ﻋﺼـﺒﺔ ظـﺮﻭﻑ🙂 ﻭ ﺯﺑـﻲ ﺑﺎﻟﻤﻜﺸﻮﻑ ﻳﺄﺗﻴﻚ ﺣﺴﺐ ﺍﻟﻈﺮﻭﻑ🙂 ﻭ ﺍﻷﻗﺮﺑﻮﻥ ﺃﻭﻟﻰ ﺑﺎﻟﻤﻌﺮﻭﻑ ، ﺯﺑ🙂ـﻲ ﻓﻲ ﺻـﺮﻡ ﺍﻣـﻚ ﻣﻠـﻔﻮﻑ",
+                                        "{Name} ﺳﺄﻧﻜﺢ ﺍﻣـﻚ ﻟﺪﺭﺟﺔ ﺍﻹﺧ🙂ـﺘﻨﺎﻕ ﻭ ﻓﻮﻕ ﺟﻌﺐ ﺃﺧـﺘﻚ ﺳﻴﺤﺼﻞ ﺍﻹﻧﺒـﺜﺎﻕ",
+                                        "{Name} ﺍﺑﻌﺒﺺ ﺃﺧـﺘﻚ ﻋﻠﻰ ﻃﻮﻝ ﺍﻟ🙂ﺴﻴﺎﻕ ﻭ ﻓﻮﻕ ﺻﺮﻡ ﺍﻣﻚ ﺳﻴﺤﺪﺙ ﺍﻟﺴﺒﺎﻕ ، ﻧﻜـﺤﺔ ﺍﻣـﻚ ﻗﺪ ﺑﺪﺃﺕ ﻓﻲ ﺍﻹﻧﻄﻼﻕ confusedكـس امـ🙂ك يا ابـن المتـبعبصه",
+                                        "{Name} بدك بلهندي 🙂خذ يا قحـبتي",
+                                        "বাংলাদেশের NO-1 বট PLAYER {Name}",
+                                        "{Name} জুতা চোর !!",
+                                        "{Name} মাদ🙃ারচ🙃োদ🙃, ফ্রি ফায়ার খেলা বাদ দিয়ে লুডু খেল যা !!",
+                                        "{Name} যাই করিস, আমি তোর অ🙃ব্বা🙃 এইডা কখনো ভুলিস না !!"
+                                    ]
+                                    
+                                    # ৩. মেইন অ্যাটাক লুপ
+                                    for msg in messages:
+                                        formatted_msg = msg.replace('{Name}', name_input.upper())
+                                        colored_message = f"[B][C][FF1493][FFFFFF][00FF00][FF0000] {formatted_msg}"
+
+                                        try:
+                                            # বটের পক্ষ থেকে ইমোট
+                                            H_bot = await Emote_k(int(bot_uid), target_emote_id, key, iv, region)
+                                            await SEndPacKeT(whisper_writer, online_writer, 'OnLine', H_bot)
+                                            
+                                            # ইউজারের পক্ষ থেকে ইমোট
+                                            H_user = await Emote_k(int(user_uid), target_emote_id, key, iv, region)
+                                            await SEndPacKeT(whisper_writer, online_writer, 'OnLine', H_user)
+                                        except: pass
+
+                                        await safe_send_message(response.Data.chat_type, colored_message, uid, chat_id, key, iv)
+                                        await asyncio.sleep(2.0)
+
+                                    finish_msg = f"[B][C][00FF00]✅ {name_input.upper()} تم اهانته  "
+                                    await safe_send_message(response.Data.chat_type, finish_msg, uid, chat_id, key, iv)
+
+                            except Exception as e:
+                                error_msg = f"[B][C][FF0000]❌ خطأ في النظام: {str(e)}"
+                                await safe_send_message(response.Data.chat_type, error_msg, uid, chat_id, key, iv)
                             
                             
                         if inPuTMsG and inPuTMsG.strip().startswith('/خوة '):
